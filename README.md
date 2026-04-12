@@ -61,17 +61,15 @@ touch CMakeLists.txt
 nano CMakeLists.txt
 
 cmake_minimum_required(VERSION 3.4)
-project(hello_world)
+project(hello_world_application)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../formatter_ex_lib formatter_ex_lib_dir)
-add_executable(hello_world ${CMAKE_CURRENT_SOURCE_DIR}/hello_world.cpp)
-target_include_directories(hello_world PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../formatter_ex_lib)
-target_link_libraries(hello_world formatter_ex_lib)
+add_executable(hello_world hello_world.cpp)
+target_link_libraries(hello_world PRIVATE formatter_ex_lib)
 
 cmake -B build
 cmake --build build
-build/hello_world
+./build/hello_world_application/hello_world
 // вывод строки "hello world"
 ```
 
@@ -96,17 +94,14 @@ touch CMakeLists.txt
 nano CMakeLists.txt
 
 cmake_minimum_required(VERSION 3.4)
-project(solver)
+project(solver_application)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(solver ${CMAKE_CURRENT_SOURCE_DIR}/equation.cpp)
-target_include_directories(solver PRIVATE
-${CMAKE_CURRENT_SOURCE_DIR}/../formatter_ex_lib
-${CMAKE_CURRENT_SOURCE_DIR}/../solver_lib)
 target_link_libraries(solver PRIVATE formatter_ex_lib solver_lib)
 
 cmake -B build
 cmake --build build
-build/solver
+./build/solver_application/solver
 // вывод корней квадратного уравнения
 ```
